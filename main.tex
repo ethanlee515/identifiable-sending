@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{authblk}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{braket}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\newcommand{\sgn}{\operatorname{sgn}}
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\spn}{\operatorname{span}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\algorithmautorefname}{Algorithm}
+\usepackage{cite,color,float}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+
+\newcommand{\KM}[1]{{\footnotesize\color{cyan}[KM: #1]}}
+\newcommand{\Ethan}[1]{{\footnotesize\color{magenta}[Ethan: #1]}}
+\newcommand{\Miriam}[1]{{\footnotesize\color{blue}[Miriam: #1]}}
+
+\title{QMPC-constant-round}
+\author[1]{Hao Chung}
+\author[2]{Kai-Min Chung}
+\author[3]{Mi-Ying Huang}
+\author[4]{Yi Lee}
+\author[5]{Yu-Ching Shen}
+\affil[1, 2, 3, 4, 5]{Institute of Information Science, Academia Sinica, Taiwan}
+\affil[1, 3, 5]{Department of Computer Science, National Taiwan University, Taiwan}
+\affil[4]{Department of Physics, National Taiwan University, Taiwan}
+
+\input{macros}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	identifiable sending
+\end{abstract}
+
+\begin{algorithm}
+	\caption{The protocol for checking...}
+	\label{AlgGroundStateCheck}
+	\begin{algorithmic}[1]
+		\State Alice creates a QECC $(\rho_i)$ tolerating $|E|$ errors
+		\State Create a componete graph $G$ with each vertex corresponding to a player
+		\For{$i\gets 1, N$}
+			\State Choose and agree on a shortest path from Alice to Bob
+			\If{Path not found}
+				\State Abort
+				\State Relays connected with Alice accuse Bob
+				\State Other relays accuse Bob
+			\EndIf
+		\EndFor
+		\State send $\rho_i$ along the path
+		\If{dropped}
+			\State Remove from $G$ the edge where dropped
+		\EndIf
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{thm}
+	Let $G=(V,E)$ be a connected graph. Remove an edge $(v_1, v_2)$ from it and create $G'=(V,E\setminus\set{(v_1, v_2)}$. One of the following is true:
+	\begin{enumerate}
+	\item $G'$ is connected
+	\item $G'$ has two connected components, one containing $v_1$ and the other containing $v_2$
+	\end{enumerate}
+\end{thm}
+\begin{proof}
+The first case is obvious. So assume case 1 isn't true.
+
+Then $G'$ has at most two connected components, since an edge connects two vertices and therefore putting it back wouldn't be able to rejoin three or more connected components.
+
+Define the following sets
+$$C_1={v|v\in G', v \textnormal{ is connected to } v_1}$$
+$$C_2={v|v\in G', v \textnormal{ isn't connected to } v_1}$$
+
+It's clear that $C_1\cap C_2=V$.
+
+Let $v\in C_2$. Then consider the path from $v$ to $v_1$ in $G$. It must've been broken through the removal of $(v_1, v_2)$, so the path must've crossed through said edge.
+Take the partial path with that last edge removed and we see that $v$ is connected with $v_2$.
+
+So all vertices in $C_2$ is connected to $v_2$, so $C_2$ forms a connected component that contains $v_2$.
+\end{proof}
+\begin{cor}
+Define $G$ and $G'$ as above.
+
+Let $A, B\in V$, and let $(v_1, v_2)$ be on an acyclic path from $A$ to $B$ in $G$.
+
+Then in case 2, the connected component containing $v_1$ must also contain $A$, and vise versa with $v_2$ and $B$.
+\end{cor}
+\begin{proof}
+Consider the partial paths from $A$ to $B$ with $(v_1, v_2)$ removed.
+\end{proof}
+
+\begin{thm}
+\Ethan{TODO ref} The protocol above is correct
+
+Completeness: If Alice and Bob are both honest, the shortest path is the one between them and the algorithm will not abort.
+
+Soundness:
+According to corollary above, if the algorithm aborts, then the last edge removed must've broken the graph into two connected components.
+
+All honest relays must be on the same connected component, since edges will not be broken between them, so they must accuse the same party.
+Their accusation will be correct since the edge directly connecting to each honest party and the one they accuse have been removed, meaning who they accuse must've dropped a message.
+
+\end{thm}
+
+
+\end{document}

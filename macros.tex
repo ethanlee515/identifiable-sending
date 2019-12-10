@@ -1,0 +1,253 @@
+\usepackage{graphicx,amsmath, amsthm, amssymb,color,url,booktabs,comment}  %cite
+\urlstyle{sf}
+%\usepackage[margin=1in]{geometry}
+% \usepackage{fancyhdr}
+%\usepackage[colorlinks]{hyperref} %pagebackref
+
+\newcommand{\nc}{\newcommand}
+\nc{\rnc}{\renewcommand}
+%
+%\newcommand{\bra}[1]{\langle #1|}
+%\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\proj}[1]{|#1\rangle\langle #1|}
+% \newcommand{\braket}[2]{\langle #1|#2\rangle}
+% \newcommand{\Bra}[1]{\left\langle #1\right|}
+% \newcommand{\Ket}[1]{\left|#1\right\rangle}
+\newcommand{\Proj}[1]{\left|#1\right\rangle\left\langle #1\right|}
+% \newcommand{\Braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\nc{\vev}[1]{\langle#1\rangle}
+\nc{\grad}{{\vec{\nabla}}}
+\nc{\abs}[1]{\lvert#1\rvert}
+%\DeclareMathOperator{\abs}{abs}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\eig}{eig}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\Par}{Par}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\polylog}{polylog}
+\DeclareMathOperator{\negl}{negl}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+% \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Sep}{Sep}
+\DeclareMathOperator{\SepSym}{SepSym}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\swap}{SWAP}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\ProdSym}{ProdSym}
+\DeclareMathOperator{\SEP}{SEP}
+\DeclareMathOperator{\PPT}{PPT}
+\DeclareMathOperator{\Wg}{Wg}
+\DeclareMathOperator{\WMEM}{WMEM}
+\DeclareMathOperator{\WOPT}{WOPT}
+
+\DeclareMathOperator{\BPP}{\mathsf{BPP}}
+\DeclareMathOperator{\QPIP}{\mathsf{QPIP}}
+\DeclareMathOperator{\SampBQP}{\mathsf{SampBQP}}
+\DeclareMathOperator{\BQP}{\mathsf{BQP}}
+\DeclareMathOperator{\cnot}{\normalfont\textsc{cnot}}
+\DeclareMathOperator{\DTIME}{\mathsf{DTIME}}
+\DeclareMathOperator{\NTIME}{\mathsf{NTIME}}
+\DeclareMathOperator{\MA}{\mathsf{MA}}
+\DeclareMathOperator{\NP}{\mathsf{NP}}
+\DeclareMathOperator{\NEXP}{\mathsf{NEXP}}
+\DeclareMathOperator{\Ptime}{\mathsf{P}}
+\DeclareMathOperator{\QMA}{\mathsf{QMA}}
+\DeclareMathOperator{\QCMA}{\mathsf{QCMA}}
+\DeclareMathOperator{\BellQMA}{\mathsf{BellQMA}}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\nn}{\nonumber}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\bn}{\begin{enumerate}}
+\newcommand{\en}{\end{enumerate}}
+\def\beas#1\eeas{\begin{eqnarray*}#1\end{eqnarray*}}
+\def\ba#1\ea{\begin{align}#1\end{align}}
+\nc{\bas}{\[\begin{aligned}}
+\nc{\eas}{\end{aligned}\]}
+\nc{\bpm}{\begin{pmatrix}}
+\nc{\epm}{\end{pmatrix}}
+\def\non{\nonumber}
+\def\nn{\nonumber}
+\def\eq#1{(\ref{eq:#1})}
+\def\eqs#1#2{(\ref{eq:#1}) and (\ref{eq:#2})}
+%\def\eq#1{Eq.~(\ref{eq:#1})}
+%\def\eqs#1#2{Eqs.~(\ref{eq:#1}) and (\ref{eq:#2})}
+\def\L{\left} 
+\def\R{\right}
+\def\ra{\rightarrow}
+\def\ot{\otimes}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{rmk}{Remark}
+\newtheorem*{thm*}{Theorem}
+%\newtheorem{claim}[thm]{Claim}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+%\newtheorem{prop}[thm]{Proposition}
+\newtheorem{dfn}{Definition}
+%\newtheorem{proto}{Protocol}
+%\newtheorem{con}[thm]{Conjecture}
+
+%\makeatletter
+%\newtheorem*{rep@theorem}{\rep@title}
+%\newcommand{\newreptheorem}[2]{%
+%\newenvironment{rep#1}[1]{%
+% \def\rep@title{#2 \ref{##1} (restatement)}%
+% \begin{rep@theorem}}%
+% {\end{rep@theorem}}}
+%\makeatother
+
+\makeatletter
+\newtheorem*{rep@theorem}{\rep@title}
+\newcommand{\newreptheorem}[2]{%
+\newenvironment{rep#1}[1]{%
+ \def\rep@title{#2 \ref{##1}}%
+ \begin{rep@theorem}}%
+ {\end{rep@theorem}}}
+\makeatother
+
+\newreptheorem{thm}{Theorem}
+\newreptheorem{lem}{Lemma}
+
+
+\def\eps{\epsilon}
+\def\va{{\vec{a}}}
+\def\vb{{\vec{b}}}
+\def\vn{{\vec{n}}}
+\def\cvs{{\cdot\vec{\sigma}}}
+\def\vx{{\vec{x}}}
+\def\Usch{U_{\text{Sch}}}
+
+\def\cA{\mathcal{A}}
+\def\cB{\mathcal{B}}
+\def\cD{\mathcal{D}}
+\def\cE{\mathcal{E}}
+\def\cF{\mathcal{F}}
+\def\cH{\mathcal{H}}
+\def\cI{{\cal I}}
+\def\cL{{\cal L}}
+\def\cM{{\cal M}}
+\def\cN{\mathcal{N}}
+\def\cO{{\cal O}}
+\def\cP{\mathcal{P}}
+\def\cQ{\mathcal{Q}}
+\def\cS{\mathcal{S}}
+\def\cT{{\cal T}}
+\def\cU{\mathcal{U}}
+\def\cW{{\cal W}}
+\def\cX{{\cal X}}
+\def\cY{{\cal Y}}
+
+\def\bp{\mathbf{p}}
+\def\bq{\mathbf{q}}
+\def\bP{{\bf P}}
+\def\bQ{{\bf Q}}
+\def\gl{\mathfrak{gl}}
+
+\def\bbC{\mathbb{C}}
+% \DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\bbE}{\mathbb{E}}
+\def\bbM{\mathbb{M}}
+\def\bbN{\mathbb{N}}
+\def\bbR{\mathbb{R}}
+\def\bbZ{\mathbb{Z}}
+\def\bbP{\mathbb{P}}
+\def\bbV{\mathbb{V}}
+\newcommand{\Real}{\textrm{Re}}
+
+\def\benum{\begin{enumerate}}
+\def\eenum{\end{enumerate}}
+\def\bit{\begin{itemize}}
+\def\eit{\end{itemize}}
+\def\bdesc{\begin{description}}
+\def\edesc{\end{description}}
+\newcommand{\fig}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\tab}[1]{Table~\ref{tab:#1}}
+\newcommand{\secref}[1]{Section~\ref{sec:#1}}
+\newcommand{\appref}[1]{Appendix~\ref{sec:#1}}
+\newcommand{\lemref}[1]{Lemma~\ref{lem:#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
+\newcommand{\propref}[1]{Proposition~\ref{prop:#1}}
+\newcommand{\protoref}[1]{Protocol~\ref{proto:#1}}
+\newcommand{\defref}[1]{Definition~\ref{def:#1}}
+\newcommand{\corref}[1]{Corollary~\ref{cor:#1}}
+\newcommand{\conref}[1]{Conjecture~\ref{con:#1}}
+
+\newcommand{\FIXME}[1]{{\color{red}FIXME: #1}}
+\nc{\todo}[1]{\textcolor{red}{todo: #1}}
+
+
+
+\newcommand{\boxdfn}[2]{
+\begin{figure}[h]
+\begin{center}
+\noindent \framebox{
+\begin{minipage}{0.8\textwidth}
+\begin{dfn}[{\bf #1}]
+\ \\ \\
+#2
+\end{dfn}
+\end{minipage}
+}
+\end{center}
+\end{figure}
+}
+
+\newcommand{\boxproto}[2]{
+\begin{figure}[h]
+\begin{center}
+\noindent \framebox{
+\begin{minipage}{0.8\textwidth}
+\begin{proto}[{\bf #1}]
+\ \\ \\
+#2
+\end{proto}
+\end{minipage}
+}
+\end{center}
+\end{figure}
+}
+
+\def\begsub#1#2\endsub{\begin{subequations}\label{eq:#1}\begin{align}#2\end{align}\end{subequations}}
+\nc\qand{\qquad\text{and}\qquad}
+\nc\mnb[1]{\medskip\noindent{\bf #1}}
+\nc\mn{\medskip\noindent}
+
+\renewcommand{\arraystretch}{1.5}
+%\nc{\problem}[1]{\item\noindent {\bf #1}}
+
+\setlength{\tabcolsep}{10pt}
+
+%%%%%% Han-Hsuan's commands %%%%%%%%
+\nc{\nl}{\nn \\ &=}  %new line
+\nc{\nnl}{\nn \\ &}  %new new line
+\nc{\fot}{\frac{1}{2}} %frac one two
+\nc{\oo}[1]{\frac{1}{#1}} % one over
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\nc{\mc}{\mathcal}
+\nc{\beq}{\begin{equation}}
+\nc{\eeq}{\end{equation}}
+% \nc{\norm}[1]{\L\| #1 \R\|}
+
+\nc{\onenorm}[1]{\L\| #1 \R\|_1} %one norm
+%\nc{\span}{\ensuremath{\mathrm{span}}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+%\nc{1}
+
+\newcommand{\hannote}[1]{\textcolor{blue}{\small {\textbf{(Han:} #1\textbf{) }}}}
+
+\newcommand{\Knote}[1]{\textcolor{red}{\small {\textbf{(KM:} #1\textbf{) }}}}
+
+\nc{\Ra}{\Rightarrow}
+\nc{\zo}{\{0,1\}}	
