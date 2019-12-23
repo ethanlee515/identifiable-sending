@@ -1,5 +1,4 @@
 \documentclass{article}
-\usepackage{authblk}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{braket}
 \usepackage{algorithm}
@@ -17,15 +16,7 @@
 \newcommand{\Ethan}[1]{{\footnotesize\color{magenta}[Ethan: #1]}}
 \newcommand{\Miriam}[1]{{\footnotesize\color{blue}[Miriam: #1]}}
 
-\title{QMPC-constant-round}
-\author[1]{Hao Chung}
-\author[2]{Kai-Min Chung}
-\author[3]{Mi-Ying Huang}
-\author[4]{Yi Lee}
-\author[5]{Yu-Ching Shen}
-\affil[1, 2, 3, 4, 5]{Institute of Information Science, Academia Sinica, Taiwan}
-\affil[1, 3, 5]{Department of Computer Science, National Taiwan University, Taiwan}
-\affil[4]{Department of Physics, National Taiwan University, Taiwan}
+\title{Identifiable Sending}
 
 \input{macros}
 
@@ -33,13 +24,9 @@
 
 \maketitle
 
-\begin{abstract}
-	identifiable sending
-\end{abstract}
-
 \begin{algorithm}
-	\caption{The protocol for checking...}
-	\label{AlgGroundStateCheck}
+	\caption{Sending a qubit from Alice to Bob, with ability to identify a malicious party}
+	\label{isalg}
 	\begin{algorithmic}[1]
 		\State Alice creates a QECC $(\rho_i)$ tolerating $|E|$ errors
 		\State Create a complete graph $G$ with each vertex corresponding to a player
@@ -50,16 +37,18 @@
 				\State Relays connected with Alice accuse Bob
 				\State Other relays accuse Bob
 			\EndIf
-		\EndFor
 		\State send $\rho_i$ along the path
 		\If{dropped}
 			\State Remove from $G$ the edge where dropped
 		\EndIf
+		\EndFor
 	\end{algorithmic}
 \end{algorithm}
 
+We first prove a theorem that we need, in order to prove the correctness and soundness of the protocol above.
+
 \begin{thm}
-	Let $G=(V,E)$ be a connected graph. Remove an edge $(v_1, v_2)$ from it and create $G'=(V,E\setminus\set{(v_1, v_2)}$. One of the following is true:
+	Let $G=(V,E)$ be a connected graph. Remove an edge $(v_1, v_2)$ from it to create $G'=(V,E\setminus\set{(v_1, v_2)}$. One of the following is true:
 	\begin{enumerate}
 	\item $G'$ is connected
 	\item $G'$ has two connected components, one containing $v_1$ and the other containing $v_2$
@@ -76,8 +65,8 @@ $$C_2=\set{v|v\in G', v \textnormal{ isn't connected to } v_1}$$
 
 It's clear that $C_1\cup C_2=V$.
 
-Let $v\in C_2$. Then consider the path from $v$ to $v_1$ in $G$. It must've been broken through the removal of $(v_1, v_2)$, so the path must've crossed through said edge.
-Take the partial path with that last edge removed and we see that $v$ is connected with $v_2$.
+Let $v\in C_2$. Then consider the path from $v$ to $v_1$ in $G$. It must've been broken by the removal of $(v_1, v_2)$; so the path must've crossed through said edge.
+Take the partial path with that edge removed and we see that $v$ is connected with $v_2$.
 
 So all vertices in $C_2$ is connected to $v_2$, so $C_2$ forms a connected component that contains $v_2$.
 \end{proof}
@@ -93,17 +82,17 @@ Consider the partial paths from $A$ to $B$ with $(v_1, v_2)$ removed.
 \end{proof}
 
 \begin{thm}
-\Ethan{TODO ref} The protocol above is correct
+The above protocol is correct
+\end{thm}
 
+\begin{proof}
 Completeness: If Alice and Bob are both honest, the shortest path is the one between them and the algorithm will not abort.
 
 Soundness:
 According to corollary above, if the algorithm aborts, then the last edge removed must've broken the graph into two connected components.
 
 All honest relays must be on the same connected component, since edges will not be broken between them, so they must accuse the same party.
-Their accusation will be correct since the edge directly connecting to each honest party and the one they accuse have been removed, meaning who they accuse must've dropped a message.
-
-\end{thm}
-
+Their accusation will be correct since the edge directly connecting to each honest party and the one they accuse have been removed, meaning who they accuse must've actually dropped a message.
+\end{proof}
 
 \end{document}
