@@ -3,6 +3,7 @@
 \usepackage{braket}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{authblk}
 \newcommand{\sgn}{\operatorname{sgn}}
 \DeclareMathOperator*{\E}{\mathbb{E}}
 \DeclareMathOperator*{\spn}{\operatorname{span}}
@@ -18,6 +19,14 @@
 
 \title{Identifiable Sending}
 
+\author[1]{Bar Alon}
+\author[2]{Hao Chung}
+\author[3]{Kai-Min Chung}
+\author[4]{Mi-Ying Huang}
+\author[5]{Yi Lee}
+\author[6]{Yu-Ching Shen}
+\affil[1]{Ariel University, Israel}
+\affil[2, 3, 4, 5, 6]{Institute of Information Science, Academia Sinica, Taiwan}
 \input{macros}
 
 \begin{document}
@@ -34,8 +43,8 @@
 			\State Choose and agree on a shortest path from Alice to Bob
 			\If{Path not found}
 				\State Abort
-				\State Relays connected with Alice accuse Bob
-				\State Other relays accuse Bob
+				\State Relays on the same connected component as Alice accuse Bob
+				\State Other relays accuse Alice
 			\EndIf
 		\State send $\rho_i$ along the path
 		\If{dropped}
